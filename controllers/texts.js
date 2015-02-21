@@ -20,7 +20,7 @@ exports.receiveText = function(request, response) {
   // TODO: Add check to make sure this is actually from a text
   var textResp = new twilio.TwimlResponse();
   var sendingNumber = request.body.From;
-  var query = {'local': { 'phone': sendingNumber } };
+  var query = {'local.phone': sendingNumber};
 
   User.findOne(query, function(err, user) {
     if(err) {
@@ -29,6 +29,11 @@ exports.receiveText = function(request, response) {
         'Content-Type': 'text/xml'
       });
       response.end(textResp.toString());
+      return;
+    }
+
+    if(!user) {
+      sendUnknownNumberMsg(sendingNumber, textResp, response);
       return;
     }
 
@@ -95,4 +100,12 @@ function listUserCommands(user) {
 
 function executeUserScript(script) {
   return;
+}
+
+function sendUnknownNumberMsg(sendingNumber, textResp, response) {
+  textResp.message("Unknown number: " + sendingNumber);
+  response.writeHead(500, {
+    'Content-Type': 'text/xml'
+  });
+  response.send(textResp.toString());
 }
