@@ -72,7 +72,7 @@ function parseTextMessage(textContent) {
   return contents;
 }
 
-function findScriptFile(user, command) {
+function findScript(user, command) {
   return '';
 }
 
