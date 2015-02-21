@@ -18,14 +18,16 @@ var client = new twilio.RestClient(
 // API number
 exports.receiveText = function(request, response) {
   var sendingNumber = request.body.From;
-  //var sendingUser = 
+  var query = {'local': { 'phone': sendingNumber } };
+  User.findOne(query, function(err, user) {
 
-  // Just send a dummy response for now
-  var textResp = new twilio.TwimlResponse();
-  textResp.message('Hello!' + sendingNumber);
-  response.writeHead(200, {
-    'Content-Type': 'text/xml'
+    // Just send a dummy response for now
+    var textResp = new twilio.TwimlResponse();
+    textResp.message('Hello, ' + user.name);
+    response.writeHead(200, {
+      'Content-Type': 'text/xml'
+    });
+    response.end(textResp.toString());
+
   });
-  response.end(textResp.toString());
-
 }
