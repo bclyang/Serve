@@ -33,6 +33,7 @@ exports.receiveText = function(request, response) {
     }
 
     if(!user) {
+      console.log("Unknown user detected");
       sendUnknownNumberMsg(sendingNumber, textResp, response);
       return;
     }
