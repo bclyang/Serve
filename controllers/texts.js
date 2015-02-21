@@ -17,10 +17,12 @@ var client = new twilio.RestClient(
 // Called by twilio upon receiving text messages to user's
 // API number
 exports.receiveText = function(request, response) {
+  var sendingNumber = request.body.From;
+  //var sendingUser = 
 
   // Just send a dummy response for now
   var textResp = new twilio.TwimlResponse();
-  textResp.message('Hello!');
+  textResp.message('Hello!' + sendingNumber);
   response.writeHead(200, {
     'Content-Type': 'text/xml'
   });
