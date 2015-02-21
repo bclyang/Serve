@@ -25,9 +25,6 @@ exports.receiveText = function(request, response) {
   User.findOne(query, function(err, user) {
     if(err) {
       textResp.message('Error occurred. Please try again.');
-      response.writeHead(500, {
-        'Content-Type': 'text/xml'
-      });
       response.end(textResp.toString());
       return;
     }
@@ -50,9 +47,6 @@ exports.receiveText = function(request, response) {
 
     if (!userScript) {
       textResp.message('Invalid command');
-      response.writeHead(200, {
-        'Content-Type': 'text/xml'
-      });
       response.end(textResp.toString());
     } else {
 
@@ -60,9 +54,6 @@ exports.receiveText = function(request, response) {
 
       // Just send a dummy response for now
       textResp.message('Hello, ' + user.name);
-      response.writeHead(200, {
-        'Content-Type': 'text/xml'
-      });
       response.end(textResp.toString());
     }
 
@@ -89,9 +80,6 @@ function isHelpRequest(command) {
 function sendHelpMessage(textResp, response, user) {
   var commandsList = listUserCommands(user);
   textResp.message('You have configured the following commands: ' + commandsList);
-  response.writeHead(200, {
-    'Content-Type': 'text/xml'
-  });
   response.end(textResp.toString());
 }
 
@@ -105,8 +93,5 @@ function executeUserScript(script) {
 
 function sendUnknownNumberMsg(sendingNumber, textResp, response) {
   textResp.message("Unknown number: " + sendingNumber);
-  response.writeHead(500, {
-    'Content-Type': 'text/xml'
-  });
   response.send(textResp.toString());
 }
