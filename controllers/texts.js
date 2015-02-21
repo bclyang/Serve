@@ -17,17 +17,38 @@ var client = new twilio.RestClient(
 // Called by twilio upon receiving text messages to user's
 // API number
 exports.receiveText = function(request, response) {
+  var textResp = new twilio.TwimlResponse();
   var sendingNumber = request.body.From;
   var query = {'local': { 'phone': sendingNumber } };
-  User.findOne(query, function(err, user) {
 
-    // Just send a dummy response for now
-    var textResp = new twilio.TwimlResponse();
-    textResp.message('Hello, ' + user.name);
-    response.writeHead(200, {
-      'Content-Type': 'text/xml'
-    });
-    response.end(textResp.toString());
+  User.findOne(query, function(err, user) {
+    var parsedText = parseTextMessage(request.body.Body);
+    var command = parsedText[0];
+    var userScript = findScriptFile(user, command);
+
+    if (!userScript) {
+      textResp.message('Invalid command');
+      response.writeHead(200, {
+        'Content-Type': 'text/xml'
+      });
+      response.end(textResp.toString());
+    } else {
+
+      // Just send a dummy response for now
+      textResp.message('Hello, ' + user.name);
+      response.writeHead(200, {
+        'Content-Type': 'text/xml'
+      });
+      response.end(textResp.toString());
+    }
 
   });
+}
+
+function parseTextMessage(textContent) {
+  return '';
+}
+
+function findScriptFile(user, command) {
+  return '';
 }
