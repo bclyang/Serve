@@ -13,7 +13,7 @@
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
     "jade": "~1.3.0",
-    "twilio": "*"
+    "twilio": "*",
     "ejs" : "~0.8.5",               
     "mongoose" : "~3.8.1",          
     "passport" : "~0.1.17",         
