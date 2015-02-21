@@ -19,11 +19,11 @@ var client = new twilio.RestClient(
 exports.receiveText = function(request, response) {
 
   // Just send a dummy response for now
-  var resp = new twilio.TwimlResponse();
-  resp.message('Hello!');
-  resp.writeHead(200, {
+  var textResp = new twilio.TwimlResponse();
+  textResp.message('Hello!');
+  response.writeHead(200, {
     'Content-Type': 'text/xml'
   });
-  resp.end(resp.toString());
+  response.end(textResp.toString());
 
 }
