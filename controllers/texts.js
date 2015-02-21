@@ -22,9 +22,24 @@ exports.receiveText = function(request, response) {
   var query = {'local': { 'phone': sendingNumber } };
 
   User.findOne(query, function(err, user) {
+    if(err) {
+      textResp.message('Error occurred. Please try again.');
+      response.writeHead(500, {
+        'Content-Type': 'text/xml'
+      });
+      response.end(textResp.toString());
+      return;
+    }
+
     var parsedText = parseTextMessage(request.body.Body);
     var command = parsedText[0];
-    var userScript = findScriptFile(user, command);
+    if (isHelpRequest(command)) {
+      sendHelpMessage(textResp, response, user);
+      return;
+    }
+
+    // Otherwise must be a user command
+    var userScript = findScript(user, command);
 
     if (!userScript) {
       textResp.message('Invalid command');
@@ -33,6 +48,8 @@ exports.receiveText = function(request, response) {
       });
       response.end(textResp.toString());
     } else {
+
+      executeUserScript(userScript);
 
       // Just send a dummy response for now
       textResp.message('Hello, ' + user.name);
@@ -45,10 +62,36 @@ exports.receiveText = function(request, response) {
   });
 }
 
+// Parses the given text message, extracting the command name
+// and any arguments for the command
+// TODO: Configure this to take in arguments w/ spaces
+// Maybe use quotes as delimiters?
 function parseTextMessage(textContent) {
-  return '';
+  var contents = textContent.split(' ');
+  return contents;
 }
 
 function findScriptFile(user, command) {
   return '';
+}
+
+function isHelpRequest(command) {
+  return command === '\help'
+}
+
+function sendHelpMessage(textResp, response, user) {
+  var commandsList = listUserCommands(user);
+  textResp.message('You have configured the following commands: ' + commandsList);
+  response.writeHead(200, {
+    'Content-Type': 'text/xml'
+  });
+  response.end(textResp.toString());
+}
+
+function listUserCommands(user) {
+  return '';
+}
+
+function executeUserScript(script) {
+  return;
 }
