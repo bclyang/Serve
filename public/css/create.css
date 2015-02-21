@@ -1,0 +1,38 @@
+div, li, a {
+	font-family: 'Raleway', sans-serif !important;
+}
+
+label {
+	font: 'Raleway', sans-serif !important;
+}
+
+.container {
+	position: relative;
+	padding-left:50px !important;
+}
+
+.container {
+	top:40px;
+	left:200px;
+	width:500px;
+}
+
+.container .title {
+	font-size:35px;
+	margin-bottom:20px;
+}
+
+textarea {
+	resize:vertical;
+}
+
+#create{
+	border:none;
+	border-radius:2px;
+	width:100px;
+	height:35px;
+	color:#fff;
+	background-color:#009688;
+	box-shadow: 1px 1px 2px 1px #bababa;
+}
+

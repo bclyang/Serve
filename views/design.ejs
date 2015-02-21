@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!--META BEGIN-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="keywords" content="SMS">
+	<meta name="description" content="SMS script execution">
+	<!--META END-->
+	<title>Design Your App - Ultimate SMS</title>
+	<!--LINKS BEGIN-->
+	<link href='bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Raleway' rel='stylesheet' type='text/css'>
+	<link href='css/reset.css' rel='stylesheet' type='text/css'>
+	<link href='css/create.css' rel='stylesheet' type='text/css'>
+    <link href='css/design.css' rel='stylesheet' type='text/css'>
+	<!--LINKS END-->
+	<!--CDN BEGIN-->
+	<script type='text/javascript' src='http://code.jquery.com/jquery-1.11.1.min.js'></script>
+	<!--CDN END-->
+	<!--LOCAL BEGIN-->
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<!--LOCAL END-->
+
+</head>
+
+<body>
+<!--HEADER BEGIN-->
+<div>
+	<% include partial/sidebar %>
+</div>
+<!--HEADER END-->
+
+
+<div class="container col-md-10" >
+
+    <div class="title">Design Your App</div>
+                    
+    <form accept-charset="utf-8" style="margin-bottom:20px">
+
+
+    	<h4>Basic</h4>
+        <table class="table">                    
+            <tr>
+                <td class="col-md-3 field-name">App Name</td>
+                <td >
+                    <input  name="name" type="text" class="form-control" fixed>
+                </td>
+            </tr>
+                                     
+            <tr>
+                <td class="col-md-3 field-name">Description</td>
+                <td>
+                    <textarea name="about" class="form-control" rows="3"></textarea>
+                </td>
+            </tr> 
+
+            <tr>
+                <td class="col-md-3 field-name">Other Recipients</td>
+                <td >
+                    <input  name="name" type="text" class="form-control" placeholder="other phone numbers">
+                </td>
+            </tr>
+        </table> 
+
+        <hr ></hr>
+
+        <h4>Features</h4>
+        <table class="table features">                    
+                                     
+            <tr>
+                <td class="col-md-3 field-name api-box">
+                    <h3>Bloomberg</h3>
+                    <div>
+                        <div class="api-item">
+                            <span>Daily News</span>
+                            <input type="checkbox">
+                            <span></span>
+                        </div>
+
+                        <div class="api-item">
+                            <span>Stocks</span>
+                            <input type="checkbox">
+                            <span class="question">?</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-md-3 field-name api-box">
+                    <h3>IBM Watson</h3>
+                    <div>
+                        <div class="api-item">
+                            <span>Smart Analysis</span>
+                            <input type="checkbox">
+                            <span class="question">?</span>
+                        </div>
+
+                        <div class="api-item">
+                            <span>Voice Search</span>
+                            <input type="checkbox">
+                            <span class="question">?</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-md-3 field-name api-box">
+                    <h3>Facebook</h3>
+                    <div>
+                        <div class="api-item">
+                            <span>Facebook</span>
+                            <input type="checkbox">
+                            <span class="question">?</span>
+                        </div>
+                    </div>
+                </td>
+            </tr> 
+       
+        </table> 
+
+        <hr></hr>
+
+        <h4>Return Message</h4>
+        <table class="table">                    
+                                     
+            <tr>
+                <td class="col-md-3 field-name">Message</td>
+                <td>
+                    <textarea name="about" class="form-control" rows="3"></textarea>
+                </td>
+            </tr> 
+        </table> 
+
+        <button id="create" class="form-control">Create</button>
+      
+    </form>
+
+</div>
+
+
+</body>
+</html>

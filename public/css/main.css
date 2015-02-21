@@ -1,0 +1,28 @@
+.create-btn {
+	border:none;
+	border-radius:2px;
+	width:60px;
+	height:60px;
+	color:#fff;
+	background-color:#009688;
+	box-shadow: 1px 1px 2px 1px #bababa;
+	border-radius:50%;
+	text-align:center;
+	line-height: 60px;
+	left:7px;
+	position: relative;
+}
+
+.create-btn:hover {
+	cursor:pointer;
+}
+
+.create-section {
+	background-color:#fafafa;
+	padding-top:30px;
+	padding-bottom:30px;
+}
+
+.create-section .sub {
+	left:130px;
+}

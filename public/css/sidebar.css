@@ -1,0 +1,51 @@
+div, li, a {
+	font-family: 'Raleway', sans-serif;
+	font-weight: normal;
+}
+
+a:hover {
+	text-decoration: none !important;
+}
+
+.sidebar {
+	position: fixed;
+	height:100%;
+	width:200px;
+	background-color: #2196F3;
+}
+
+.sidebar .profile-picture {
+	position:relative;
+	border-radius:50%;
+	width:120px;
+	margin-left:40px;
+	margin-top:40px;
+	border:5px solid #03A9F4;
+}
+
+.profile-info .name, .profile-info .number {
+	color:#fafafa;
+	text-align:center;
+}
+
+.profile-info .name {
+	font-size:30px;
+	margin-top:10px;
+}
+
+.sidebar-bottom {
+	position: absolute;
+	bottom:0;
+	text-align:center;
+	width:100%;
+}
+
+.sidebar-bottom .edit {
+	font-size:20px;
+	color:#01579B;
+	margin-bottom:30px;
+}
+
+.sidebar-bottom span {
+	top:5px;
+}

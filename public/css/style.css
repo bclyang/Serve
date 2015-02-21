@@ -1,0 +1,8 @@
+div, li, a {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: normal;
+}
+
+.navbar {
+	box-shadow: 2px 3px 2px #ddd;
+}
