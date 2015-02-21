@@ -8,3 +8,5 @@ var router = express.Router();
 var textsController = require('../controllers/texts');
 
 router.all('/', textsController.receiveText);
+
+module.exports = router;

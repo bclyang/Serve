@@ -5,12 +5,12 @@
 
 var twilio = require('twilio');
 
-var User = require('../models/User');
+var User = require('../models/user');
 var secrets = require('../config/secrets');
 
 var client = new twilio.RestClient(
   secrets.twilio.twilio_account_id,
-  secrets.twilio.twilio_auth_token,
+  secrets.twilio.twilio_auth_token
 );
 
 
