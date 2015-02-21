@@ -10,6 +10,7 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 var mongoose = require('mongoose');
+var settings = require('./config/settings');
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -22,7 +23,7 @@ var app = express();
 var port = process.env.PORT || 8080;
 
 // connect to database
-mongoose.connect('mongodb://localhost:27017/treehacks-db');
+mongoose.connect(settings.mongoUrl);
 
 
 // view engine setup

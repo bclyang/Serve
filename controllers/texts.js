@@ -17,6 +17,7 @@ var client = new twilio.RestClient(
 // Called by twilio upon receiving text messages to user's
 // API number
 exports.receiveText = function(request, response) {
+  // TODO: Add check to make sure this is actually from a text
   var textResp = new twilio.TwimlResponse();
   var sendingNumber = request.body.From;
   var query = {'local': { 'phone': sendingNumber } };
