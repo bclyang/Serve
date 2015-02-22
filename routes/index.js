@@ -37,7 +37,7 @@ module.exports = function(passport) {
 		res.redirect('/main');
 	})
 
-	router.get('/main',function(req,res) {
+	router.get('/main', isLoggedIn, function(req,res) {
 		res.render('main');
 	});
 
@@ -53,7 +53,7 @@ module.exports = function(passport) {
 		res.render('create');
 	});
 
-	router.get('/design', function(req,res) {
+	router.get('/design', isLoggedIn, function(req,res) {
 		res.render('design');
 	});
 
