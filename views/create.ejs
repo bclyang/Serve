@@ -11,7 +11,7 @@
 	<title>Create New Project - Ultimate SMS</title>
 	<!--LINKS BEGIN-->
 	<link href='bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Raleway' rel='stylesheet' type='text/css'>
+	
 	<link href='css/reset.css' rel='stylesheet' type='text/css'>
 	<link href='css/create.css' rel='stylesheet' type='text/css'>
 	<!--LINKS END-->
@@ -21,6 +21,24 @@
 	<!--LOCAL BEGIN-->
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<!--LOCAL END-->
+
+    <style type="text/css" media="screen">
+    .editor-container {
+        position: relative;
+        width:100%;
+        height:300px;
+        background-color:#ddd;
+    }
+
+    #editor { 
+        position: absolute;
+        font-family:monospace !important;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    </style>
 
 </head>
 
@@ -70,17 +88,10 @@
                                      
             <tr>
                 <td class="col-md-3 field-name">Command</td>
-                <td>
-                    <textarea name="code" class="form-control" rows="3"></textarea>
-                </td>
+                <td><div class='editor-container'><div id="editor"></div>
+                </div></td>
             </tr> 
 
-            <tr>
-                <td class="col-md-3 field-name">Script</td>
-                <td>
-                    <input  name="file" type="file" class="form-control">
-                </td>
-            </tr> 
         </table> 
 
         <hr></hr>
@@ -103,5 +114,11 @@
 </div>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.container.style.fontFamily = "monospace";
+    editor.getSession().setMode("ace/mode/python");
+</script>
 </body>
 </html>
