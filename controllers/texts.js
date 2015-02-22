@@ -49,7 +49,7 @@ exports.receiveText = function(request, response) {
             if (parsedText.length >= 3) {
               language = parsedText[2];
             }
-            text = parsedText[1];
+            var text = parsedText[1];
            // var translation = translate(language, parsedText[1]);
 
             var transStr="mt-";
