@@ -143,7 +143,7 @@ function sendUnknownNumberMsg(sendingNumber, textResp, response) {
 }
 
 function forwardToOtherRecepients(creatorName, script, output) {
-  for(var i = 0; i < script.recepients; i++){
+  for(var i = 0; i < script.recepients.length; i++){
     var recpientNumber = script.recepients[i];
     var message = 'The following was generated and sent to you by ' + creatorName + '\n\n';
     message += output;
