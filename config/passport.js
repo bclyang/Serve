@@ -65,8 +65,8 @@ module.exports = function(passport) {
                 newUser.name = req.body.name;
                 newUser.programs = [];
 
-                var newPath = __dirname + "/../user_info/" + newUser.local.phone;
-                fs.mkdirSync(newPath);
+                // var newPath = __dirname + "/../user_info/" + newUser.local.phone;
+                // fs.mkdirSync(newPath);
 
                 // save the user
                 newUser.save(function(err) {

@@ -4,7 +4,7 @@ var programSchema = mongoose.Schema({
 
     name: String,
     description: String,
-    filepath: String
+    code: String
 
 });
 

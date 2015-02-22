@@ -23,17 +23,17 @@ module.exports = function(passport) {
 	}));
 
 	router.post('/user/program', function(req, res) {
-		var filePath = __dirname+'/../user_info/' + req.user.local.phone + '/' + req.body.name;
+		// var filePath = __dirname+'/../user_info/' + req.user.local.phone + '/' + req.body.name;
 		req.user.programs.push({    
 			name: req.body.name,
     		description: req.body.about,
-    		filepath: filePath
+    		code: filePath
     	});
     	req.user.save(function(err) {
     		if(err)
     			throw err;
     	});
-    	fs.writeFileSync(filePath, req.body.code);
+    	// fs.writeFileSync(filePath, req.body.code);
 		res.redirect('/main');
 	})
 
