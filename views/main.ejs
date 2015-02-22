@@ -40,16 +40,13 @@
     <form accept-charset="utf-8" style="margin-bottom:20px">
 
     	<h4>App List</h4>
-        <table class="table">                    
+        <table class="table"> 
+            <% for (i = user.programs.length-1; i >= 0; i--) {%>                   
             <tr>
-                <td class="col-md-11 field-name">daily digest</td>
+                <td class="col-md-11 field-name"><%= user.programs[i].name %></td>
                 <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
             </tr>
-                                     
-            <tr>
-                <td class="col-md-11 field-name">coming home</td>
-                <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
-            </tr> 
+            <% } %>
         </table> 
 
     </form>

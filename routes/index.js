@@ -38,7 +38,9 @@ module.exports = function(passport) {
 	})
 
 	router.get('/main', isLoggedIn, function(req,res) {
-		res.render('main');
+		res.render('main', {
+			user:req.user
+		});
 	});
 
 	router.get('/login', function(req,res) {
@@ -50,11 +52,15 @@ module.exports = function(passport) {
 	});
 
 	router.get('/create', isLoggedIn, function(req,res) {
-		res.render('create');
+		res.render('create', {
+			user:req.user
+		});
 	});
 
 	router.get('/design', isLoggedIn, function(req,res) {
-		res.render('design');
+		res.render('design', {
+			user:req.user
+		});
 	});
 
 	function isLoggedIn(req, res, next) {
