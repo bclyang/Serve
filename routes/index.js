@@ -37,7 +37,16 @@ module.exports = function(passport) {
     	});
     	// fs.writeFileSync(filePath, req.body.code);
 		res.redirect('/main');
-	})
+	});
+
+	router.post('/user/program/remove', function(req, res) {
+		req.user.programs.id(req.body.programid).remove();
+		req.user.save(function (err) {
+			if(err)
+				throw err;
+			res.send({});
+		});
+	});
 
 	router.get('/main', isLoggedIn, function(req,res) {
 		res.render('main', {

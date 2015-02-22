@@ -43,8 +43,8 @@
         <table class="table"> 
             <% for (i = user.programs.length-1; i >= 0; i--) {%>                   
             <tr>
-                <td class="col-md-11 field-name"><%= user.programs[i].name %></td>
-                <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+                <td id=<%= user.programs[i].id %> class="col-md-11 field-name item-name"><%= user.programs[i].name %></td>
+                <td><span class="glyphicon glyphicon-remove remove" aria-hidden="true"></span></td>
             </tr>
             <% } %>
         </table> 
@@ -68,4 +68,17 @@
 
 
 </body>
+
+<script>
+    $('.remove').click(function(){
+        var $sib = $(this).parent().siblings('.item-name');
+        var data = {
+            programid: $sib.attr('id')
+        };
+        $.post('/user/program/remove', data, function( data ) {
+            $sib.parent().fadeOut();
+        }, 'json');
+    });
+</script>
+
 </html>
