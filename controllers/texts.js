@@ -37,7 +37,7 @@ exports.receiveText = function(request, response) {
         var command = parsedText[0];
         if (isHelpRequest(command)) {
           var commandsList = listUserCommands(user);
-          textResp.message('You have configured the following commands: ' + commandsList);
+          textResp.message('You have configured the following commands:\n' + commandsList);
           response.send(textResp.toString());
         } else {
 
