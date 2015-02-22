@@ -48,11 +48,30 @@ exports.receiveText = function(request, response) {
             response.send(textResp.toString());
           } else {
 
-            executeUserScript(userScript);
+            var args = parsedText;
+            args.shift() // Shift array to get only arguments
 
-            // Just send a dummy response for now
-            textResp.message('Hello, ' + user.name);
-            response.send(textResp.toString());
+            console.log('Executing user command: ' + userScript.name);
+            var spawn = require('child_process').spawn;
+            var process = spawn(userScript.filepath, args);
+            process.stdout.setEncoding('utf8');
+
+            // Set up callback to catch all script output
+            var output = '';
+            process.stdout.on('data', function (data) {
+              var output += data.toString();
+            });
+
+            // Send text response once script is done
+            process.on('close', function (code) {
+              if (output) {
+                textResp.message('Result: ' + output);
+                response.send(textResp.toString());
+              } else {
+                textResp.message('Script done, exitted with code ' + code);
+                response.send(textResp.toString());
+              }
+            });
           }
         }
       }
@@ -98,8 +117,21 @@ function listUserCommands(user) {
   return '';
 }
 
-function executeUserScript(script) {
+function executeUserScript(script, args) {
   console.log('Executing user command: ' + script.name);
+  var spawn = require('child_process').spawn;
+  var process = spawn(script.filepath, args);
+  process.stdout.setEncoding('utf8');
+
+  // Set up callback to catch all script output
+  var output = '';
+  process.stdout.on('data', function (data) {
+    var output += data.toString();
+  });
+
+  process.on('close', function (code) {
+    
+  });
   return;
 }
 
