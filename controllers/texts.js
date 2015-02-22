@@ -40,51 +40,64 @@ exports.receiveText = function(request, response) {
           textResp.message('You have configured the following commands:\n' + commandsList);
           response.send(textResp.toString());
         } else {
+          if(isTranslateRequest(command)) {
+            // Handle translation
+            // TODO: Get this working lol
+            console.log("Translating given string");
 
-          // Otherwise must be a user command
-          var userScript = findScript(user, command);
-
-          if (!userScript) {
-            console.log('Invalid command name');
-            textResp.message('Invalid command');
+            var language = '';
+            if (parsedText.length >= 3) {
+              language = parsedText[2];
+            }
+            var translation = translate(language, parsedText[1]);
+            textResp.message(translation);
             response.send(textResp.toString());
           } else {
 
-            var args = parsedText;
-            args.shift() // Shift array to get only arguments
+            // Otherwise must be a user command
+              var userScript = findScript(user, command);
 
-            console.log('Executing user command: ' + userScript.name);
-            fs.writeFile('../tmp/' + userScript.name + '.py', userScript.code, function(err) {
-              console.log(userScript.code);
-              if (err){
-                textResp.message('Error occurred running the command.');
-                response.send(textResp.toString());
-              } else {
-                args.unshift('../tmp/' + userScript.name + '.py');
-                console.log('Passing in the following args: ' + args.join(' '));
-                var process = spawn('python', args);
-                process.stdout.setEncoding('utf8');
+            if (!userScript) {
+              console.log('Invalid command name');
+              textResp.message('Invalid command');
+              response.send(textResp.toString());
+            } else {
 
-                // Set up callback to catch all script output
-                var output = '';
-                process.stdout.on('data', function (data) {
-                  output += data.toString();
-                });
+              var args = parsedText;
+              args.shift() // Shift array to get only arguments
 
-                // Send text response once script is done
-                process.on('close', function (code) {
-                  if (output) {
-                    forwardToOtherRecipients(user.name, userScript, output);
-                    textResp.message('Result: ' + output);
-                    response.send(textResp.toString());
-                  } else {
-                    textResp.message('Script done, exited with code ' + code);
-                    response.send(textResp.toString());
-                  }
-                });
-              }
+              console.log('Executing user command: ' + userScript.name);
+              fs.writeFile('../tmp/' + userScript.name + '.py', userScript.code, function(err) {
+                console.log(userScript.code);
+                if (err){
+                  textResp.message('Error occurred running the command.');
+                  response.send(textResp.toString());
+                } else {
+                  args.unshift('../tmp/' + userScript.name + '.py');
+                  console.log('Passing in the following args: ' + args.join(' '));
+                  var process = spawn('python', args);
+                  process.stdout.setEncoding('utf8');
 
-            });
+                  // Set up callback to catch all script output
+                  var output = '';
+                  process.stdout.on('data', function (data) {
+                    output += data.toString();
+                  });
+
+                  // Send text response once script is done
+                  process.on('close', function (code) {
+                    if (output) {
+                      forwardToOtherRecipients(user.name, userScript, output);
+                      textResp.message('Result: ' + output);
+                      response.send(textResp.toString());
+                    } else {
+                      textResp.message('Script done, exited with code ' + code);
+                      response.send(textResp.toString());
+                    }
+                  });
+                }
+              });
+            }
           }
         }
       }
@@ -119,6 +132,10 @@ function findScript(user, command) {
 function isHelpRequest(command) {
   console.log('Checking if command ' + command + ' is a help request');
   return command === '.help';
+}
+
+function isTranslateRequest(command) {
+  return command === '.translate'
 }
 
 function sendHelpMessage(textResp, response, user) {
@@ -162,4 +179,41 @@ function forwardToOtherRecipients(creatorName, script, output) {
     });
   }
   return;
+}
+
+
+// Translation Functions
+
+var request = require('request');
+
+function translate(lang, text) {
+  var transStr="mt-";
+  transStr+=langMatch("english")+"-";
+  transStr+=langMatch(lang);
+
+  request.post(
+    'https://gateway.watsonplatform.net/machine-translation-beta/api',
+    {"sid":transStr,"txt":text },
+    function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        return body;
+      } else {
+        return '';
+      }
+    });
+}
+
+function langMatch(lang) {
+  switch(lang) {
+  case "english":
+    return "enus";
+  case "Portuguese":
+    return "ptbr";
+  case "Spanish":
+    return "eses";
+  case "french":
+    return "frfr";
+  default:
+    return "";
+  }
 }
