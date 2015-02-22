@@ -1,4 +1,4 @@
-div, li, a {
+div, li, a,h1,p, footer {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: normal;
 }
@@ -6,3 +6,68 @@ div, li, a {
 .navbar {
 	box-shadow: 2px 3px 2px #ddd;
 }
+
+.title {
+	font-size:100px;
+	color:white;
+	width:800px;
+	left:50%;
+	position: relative;
+	margin-left:-300px;
+	margin-top:-89px;
+}
+
+.caption {
+	text-align: center;
+	font-size:30px;
+	color:#454545;
+}
+
+
+.btn-item {
+	border:none;
+	border-radius:2px;
+	width:200px;
+	height:65px;
+	color:#fff;
+	background-color:#00838F;
+	box-shadow: 1px 1px 2px 1px #bababa;
+	font-size:25px;
+
+    transition: background-color 0.5s linear;
+    -o-transition: background-color 0.5s linear;
+    -ms-transition: background-color 0.5s linear;
+    -moz-transition: background-color 0.5s linear;
+	-webkit-transition: background-color 0.5s linear;
+}
+
+.btn-item:hover{
+	background-color:#00ACC1;
+}
+
+.login-btn {
+	background-color:white;
+	color:black;
+	margin-left:30px;
+
+	 transition: background-color 0.5s linear;
+    -o-transition: background-color 0.5s linear;
+    -ms-transition: background-color 0.5s linear;
+    -moz-transition: background-color 0.5s linear;
+	-webkit-transition: background-color 0.5s linear;
+}
+
+.login-btn:hover {
+	background-color:#eee;
+}
+
+
+footer {
+	position: absolute;
+	bottom:0;
+	width:100%;
+	text-align:center;
+	color:#888;
+	margin-bottom:5px;
+}
+
