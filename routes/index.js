@@ -24,12 +24,12 @@ module.exports = function(passport) {
 
 	router.post('/user/program', function(req, res) {
 		// var filePath = __dirname+'/../user_info/' + req.user.local.phone + '/' + req.body.name;
-		console.log(req);
+		var data = JSON.parse(req.body.data);
 		req.user.programs.push({    
-			name: req.body.name,
-    		description: req.body.about,
-    		recipients: req.body.recipients,
-    		code: req.body.code
+			name: data["name"],
+    		description: data["about"],
+    		recipients: data["recipients"],
+    		code: data["code"]
     	});
     	req.user.save(function(err) {
     		if(err)
