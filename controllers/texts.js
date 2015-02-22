@@ -49,9 +49,25 @@ exports.receiveText = function(request, response) {
             if (parsedText.length >= 3) {
               language = parsedText[2];
             }
-            var translation = translate(language, parsedText[1]);
-            textResp.message(translation);
-            response.send(textResp.toString());
+            text = parsedText[1];
+           // var translation = translate(language, parsedText[1]);
+
+            var transStr="mt-";
+            transStr+=langMatch("english")+"-";
+            transStr+=langMatch(language);
+
+            request.post(
+              'https://gateway.watsonplatform.net/machine-translation-beta/api',
+              {"sid":transStr,"txt":text},
+              function (error, response, body) {
+              if (!error && response.statusCode == 200) {
+                textResp.message(translation);
+                response.send(textResp.toString());
+              } else {
+                textResp.message('Translation failed.');
+                response.send(textResp.toString());
+              }
+            });
           } else {
 
             // Otherwise must be a user command
