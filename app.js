@@ -78,7 +78,8 @@ app.use(function(err, req, res, next) {
     });
 });
 
+/*
 app.listen(port);
 console.log('The magic happens on port ' + port);
-
+*/
 module.exports = app;
