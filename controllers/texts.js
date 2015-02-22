@@ -126,7 +126,7 @@ function sendHelpMessage(textResp, response, user) {
 
 function listUserCommands(user) {
   var result = [];
-  for (scriptIndex in user.programs) {
+  for (var scriptIndex in user.programs) {
     var script = user.programs[scriptIndex];
     result.append([script.name, script.description].join(': '));
   }
