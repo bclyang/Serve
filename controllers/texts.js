@@ -104,8 +104,8 @@ function parseTextMessage(textContent) {
 }
 
 function findScript(user, command) {
-  for(var scriptIndex in user.programs){
-    var script = user.programs[scriptIndex];
+  for(var i = 0; i < user.programs.length; i++){
+    var script = user.programs[i];
     if (script.name === command) {
       return script;
     }
@@ -126,9 +126,10 @@ function sendHelpMessage(textResp, response, user) {
 
 function listUserCommands(user) {
   var result = [];
-  for (var scriptIndex in user.programs) {
-    var script = user.programs[scriptIndex];
-    result.push([script.name, script.description].join(': '));
+  for (var i = 0; i < user.programs.length; i++) {
+    var script = user.programs[i];
+    var entry = script.name + ': ' + script.description;
+    result.push(entry);
   }
   return result.join('\n');
 }
