@@ -115,7 +115,7 @@ function findScript(user, command) {
 
 function isHelpRequest(command) {
   console.log('Checking if command ' + command + ' is a help request');
-  return command === '\help';
+  return command === '.help';
 }
 
 function sendHelpMessage(textResp, response, user) {
