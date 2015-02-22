@@ -36,7 +36,7 @@
 
     <div class="title">Create New Project</div>
                     
-    <form accept-charset="utf-8" style="margin-bottom:20px">
+    <form action="/user/program" method=post accept-charset="utf-8" style="margin-bottom:20px">
 
 
     	<h4>Basic</h4>
@@ -58,7 +58,7 @@
             <tr>
                 <td class="col-md-3 field-name">Other Recipients</td>
                 <td >
-                    <input  name="name" type="text" class="form-control" placeholder="other phone numbers">
+                    <input  name="recipients" type="text" class="form-control" placeholder="other phone numbers">
                 </td>
             </tr>
         </table> 
@@ -71,14 +71,14 @@
             <tr>
                 <td class="col-md-3 field-name">Command</td>
                 <td>
-                    <textarea name="about" class="form-control" rows="3"></textarea>
+                    <textarea name="code" class="form-control" rows="3"></textarea>
                 </td>
             </tr> 
 
             <tr>
                 <td class="col-md-3 field-name">Script</td>
                 <td>
-                    <input  name="name" type="file" class="form-control">
+                    <input  name="file" type="file" class="form-control">
                 </td>
             </tr> 
         </table> 
@@ -91,7 +91,7 @@
             <tr>
                 <td class="col-md-3 field-name">Message</td>
                 <td>
-                    <textarea name="about" class="form-control" rows="3"></textarea>
+                    <textarea name="message" class="form-control" rows="3"></textarea>
                 </td>
             </tr> 
         </table> 

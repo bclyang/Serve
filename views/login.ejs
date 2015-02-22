@@ -29,27 +29,29 @@
 <div class="decoration-box"></div>	
 
 <div class="container">
-	<h1 class="title">Login</h1>
+	<form action="/login" method="post" accept-charset="utf-8">
+		<h1 class="title">Login</h1>
 
-	<div class="login-item">
-		<label>Phone Number</label>
-		<div>
-			<input type="text" class="form-control">
+		<div class="login-item">
+			<label>Phone Number</label>
+			<div>
+				<input name="phone" type="text" class="form-control">
+			</div>
 		</div>
-	</div>
 
-	<div class="login-item">
-		<label>Password</label>
-		<div>
-			<input type="password" class="form-control">
+		<div class="login-item">
+			<label>Password</label>
+			<div>
+				<input name="password" type="password" class="form-control">
+			</div>
 		</div>
-	</div>
-	<a href=""><div class="forgot">Forgot your password?</div></a>
+		<a href=""><div class="forgot">Forgot your password?</div></a>
 
-	<div style="margin-top:30px">
-		<button class="btn-item" style="background-color:white;color:black;margin-right:10px">Cancel</button>
-		<button class="btn-item">Login</button>
-	</div>
+		<div style="margin-top:30px">
+			<button class="btn-item" style="background-color:white;color:black;margin-right:10px">Cancel</button>
+			<button type="submit" class="btn-item">Login</button>
+		</div>
+	</form>
 
 
 </div>
