@@ -9,6 +9,7 @@ var User = require('../models/users');
 var secrets = require('../config/secrets');
 var fs = require('fs');
 var spawn = require('child_process').spawn;
+var requests = require('requests');
 
 var client = new twilio.RestClient(
   secrets.twilio.twilio_account_id,
@@ -56,7 +57,7 @@ exports.receiveText = function(request, response) {
             transStr+=langMatch("english")+"-";
             transStr+=langMatch(language);
 
-            request.post(
+            requests.post(
               'https://gateway.watsonplatform.net/machine-translation-beta/api',
               {"sid":transStr,"txt":text},
               function (error, response, body) {
