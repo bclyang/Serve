@@ -75,7 +75,7 @@ exports.receiveText = function(request, response) {
                     textResp.message('Result: ' + output);
                     response.send(textResp.toString());
                   } else {
-                    textResp.message('Script done, exitted with code ' + code);
+                    textResp.message('Script done, exited with code ' + code);
                     response.send(textResp.toString());
                   }
                 });
