@@ -9,7 +9,7 @@ var User = require('../models/users');
 var secrets = require('../config/secrets');
 var fs = require('fs');
 var spawn = require('child_process').spawn;
-var requests = require('requests');
+var requests = require('request');
 
 var client = new twilio.RestClient(
   secrets.twilio.twilio_account_id,
