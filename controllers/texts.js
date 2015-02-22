@@ -74,7 +74,7 @@ exports.receiveText = function(request, response) {
                 // Send text response once script is done
                 process.on('close', function (code) {
                   if (output) {
-                    forwardToOtherRecepients(user.name, userScript, output);
+                    forwardToOtherRecipients(user.name, userScript, output);
                     textResp.message('Result: ' + output);
                     response.send(textResp.toString());
                   } else {
@@ -142,22 +142,22 @@ function sendUnknownNumberMsg(sendingNumber, textResp, response) {
   response.send(textResp.toString());
 }
 
-function forwardToOtherRecepients(creatorName, script, output) {
-  for(var i = 0; i < script.recepients.length; i++){
-    var recpientNumber = script.recepients[i];
+function forwardToOtherRecipients(creatorName, script, output) {
+  for(var i = 0; i < script.recipients.length; i++){
+    var recipientNumber = script.recipients[i];
     var message = 'The following was generated and sent to you by ' + creatorName + '\n\n';
     message += output;
-    console.log('Sending to the following number: ' + recepientNumber);
+    console.log('Sending to the following number: ' + recipientNumber);
     console.log('Sending the message: ' + message);
     client.sendSms({
-      to: recepientNumber,
+      to: recipientNumber,
       from: secrets.twilio.twilio_phone_number,
       body: message
     }, function(err, message) {
       if (err) {
-        console.log("An error occurred sending the message to other recepients.");
+        console.log("An error occurred sending the message to other recipients.");
       } else {
-        console.log("Message successfully forwarded to recepient");
+        console.log("Message successfully forwarded to recipient");
       }
     });
   }
