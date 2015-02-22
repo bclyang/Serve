@@ -59,7 +59,7 @@ exports.receiveText = function(request, response) {
             // Set up callback to catch all script output
             var output = '';
             process.stdout.on('data', function (data) {
-              var output += data.toString();
+              output += data.toString();
             });
 
             // Send text response once script is done
@@ -117,6 +117,7 @@ function listUserCommands(user) {
   return '';
 }
 
+/*
 function executeUserScript(script, args) {
   console.log('Executing user command: ' + script.name);
   var spawn = require('child_process').spawn;
@@ -133,7 +134,7 @@ function executeUserScript(script, args) {
     
   });
   return;
-}
+}*/
 
 function sendUnknownNumberMsg(sendingNumber, textResp, response) {
   textResp.message("Unknown number: " + sendingNumber);
