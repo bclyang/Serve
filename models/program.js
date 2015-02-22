@@ -4,6 +4,7 @@ var programSchema = mongoose.Schema({
 
     name: String,
     description: String,
+    recipients: [String],
     code: String
 
 });
