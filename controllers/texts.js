@@ -65,6 +65,7 @@ exports.receiveText = function(request, response) {
 // TODO: Configure this to take in arguments w/ spaces
 // Maybe use quotes as delimiters?
 function parseTextMessage(textContent) {
+  console.log("Parsing text message");
   var contents = textContent.split(' ');
   return contents;
 }
