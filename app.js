@@ -20,7 +20,7 @@ var texts = require('./routes/texts');
 
 var app = express();
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 
 // connect to database
 mongoose.connect(settings.mongoUrl);
