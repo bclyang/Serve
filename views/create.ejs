@@ -54,7 +54,7 @@
 
     <div class="title">Create New Project</div>
                     
-    <form action="/user/program" method=post accept-charset="utf-8" style="margin-bottom:20px">
+    <form id="form"  action="/user/program" method=post accept-charset="utf-8" style="margin-bottom:20px">
 
 
     	<h4>Basic</h4>
@@ -62,21 +62,21 @@
             <tr>
                 <td class="col-md-3 field-name">Project Name</td>
                 <td >
-                    <input  name="name" type="text" class="form-control" fixed>
+                    <input id="name"   type="text" class="form-control" fixed>
                 </td>
             </tr>
                                      
             <tr>
                 <td class="col-md-3 field-name">Description</td>
                 <td>
-                    <textarea name="about" class="form-control" rows="3"></textarea>
+                    <textarea id="about" class="form-control" rows="3"></textarea>
                 </td>
             </tr> 
 
             <tr>
                 <td class="col-md-3 field-name">Other Recipients</td>
                 <td >
-                    <input  name="recipients" type="text" class="form-control" placeholder="other phone numbers">
+                    <input  id="recipients" type="text" class="form-control" placeholder="other phone numbers">
                 </td>
             </tr>
         </table> 
@@ -116,9 +116,30 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
 <script>
+$(document).ready(function() {
+
+
+
     var editor = ace.edit("editor");
     editor.container.style.fontFamily = "monospace";
     editor.getSession().setMode("ace/mode/python");
+
+    $( "#form" ).submit(function( eventObject ) {
+        eventObject.preventDefault();
+
+        var data = {};
+        data.name = $('#name').val();
+        data.about = $('#about').val();
+        data.recipients = $('#recipients').val().split(" ");
+        data.code = editor.getValue();
+
+        var url = $('#form').attr('action');
+        $.post(url,{data: JSON.stringify(data)},function(data) {
+            window.location.href="/main";
+        });
+    });
+
+});
 </script>
 </body>
 </html>
