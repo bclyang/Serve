@@ -128,7 +128,7 @@ function listUserCommands(user) {
   var result = [];
   for (var scriptIndex in user.programs) {
     var script = user.programs[scriptIndex];
-    result.append([script.name, script.description].join(': '));
+    result.push([script.name, script.description].join(': '));
   }
   return result.join('\n');
 }
