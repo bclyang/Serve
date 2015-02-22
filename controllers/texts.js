@@ -55,11 +55,13 @@ exports.receiveText = function(request, response) {
 
             console.log('Executing user command: ' + userScript.name);
             fs.writeFile('../tmp/' + userScript.name + '.py', userScript.code, function(err) {
+              console.log(userScript.code);
               if (err){
                 textResp.message('Error occurred running the command.');
                 response.send(textResp.toString());
               } else {
                 args.unshift('../tmp/' + userScript.name + '.py');
+                console.log('Passing in the following args: ' + args.join(' '));
                 var process = spawn('python', args);
                 process.stdout.setEncoding('utf8');
 
