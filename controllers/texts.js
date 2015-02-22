@@ -7,6 +7,8 @@ var twilio = require('twilio');
 
 var User = require('../models/users');
 var secrets = require('../config/secrets');
+var fs = require('fs');
+var spawn = require('child_process').spawn;
 
 var client = new twilio.RestClient(
   secrets.twilio.twilio_account_id,
@@ -52,25 +54,33 @@ exports.receiveText = function(request, response) {
             args.shift() // Shift array to get only arguments
 
             console.log('Executing user command: ' + userScript.name);
-            var spawn = require('child_process').spawn;
-            var process = spawn('..' + userScript.filepath, args);
-            process.stdout.setEncoding('utf8');
-
-            // Set up callback to catch all script output
-            var output = '';
-            process.stdout.on('data', function (data) {
-              output += data.toString();
-            });
-
-            // Send text response once script is done
-            process.on('close', function (code) {
-              if (output) {
-                textResp.message('Result: ' + output);
+            fs.writeFile('../tmp/' + userScript.name + '.py', userScript.code, function(err) {
+              if (err){
+                textResp.message('Error occurred running the command.');
                 response.send(textResp.toString());
               } else {
-                textResp.message('Script done, exitted with code ' + code);
-                response.send(textResp.toString());
+                args.unshift('../tmp/' + userScript.name + '.py');
+                var process = spawn('python', args);
+                process.stdout.setEncoding('utf8');
+
+                // Set up callback to catch all script output
+                var output = '';
+                process.stdout.on('data', function (data) {
+                  output += data.toString();
+                });
+
+                // Send text response once script is done
+                process.on('close', function (code) {
+                  if (output) {
+                    textResp.message('Result: ' + output);
+                    response.send(textResp.toString());
+                  } else {
+                    textResp.message('Script done, exitted with code ' + code);
+                    response.send(textResp.toString());
+                  }
+                });
               }
+
             });
           }
         }
@@ -104,7 +114,7 @@ function findScript(user, command) {
 }
 
 function isHelpRequest(command) {
-  return command === '\help'
+  return command == '\help'
 }
 
 function sendHelpMessage(textResp, response, user) {
