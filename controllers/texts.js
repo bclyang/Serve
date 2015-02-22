@@ -147,6 +147,8 @@ function forwardToOtherRecepients(creatorName, script, output) {
     var recpientNumber = script.recepients[i];
     var message = 'The following was generated and sent to you by ' + creatorName + '\n\n';
     message += output;
+    console.log('Sending to the following number: ' + recepientNumber);
+    console.log('Sending the message: ' + message);
     client.sendSms({
       to: recepientNumber,
       from: secrets.twilio.twilio_phone_number,
