@@ -54,7 +54,7 @@
 
     <div class="title">Create New Project</div>
                     
-    <form id="form"  action="/user/program" method=post accept-charset="utf-8" style="margin-bottom:20px">
+    <form id="form"  action="/user/program" method='post' accept-charset="utf-8" style="margin-bottom:20px">
 
 
     	<h4>Basic</h4>
@@ -107,7 +107,7 @@
             </tr> 
         </table> 
 
-        <button id="create" class="form-control">Create</button>
+        <button type="submit" id="create" class="form-control">Create</button>
       
     </form>
 
@@ -132,6 +132,8 @@ $(document).ready(function() {
         data.about = $('#about').val();
         data.recipients = $('#recipients').val().split(" ");
         data.code = editor.getValue();
+
+        console.log('hello');
 
         var url = $('#form').attr('action');
         $.post(url,{data: JSON.stringify(data)},function(data) {
