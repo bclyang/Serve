@@ -11,7 +11,6 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var settings = require('./config/settings');
-var sendgrid  = require('sendgrid')('treehackssms', 'Treehacksrocks15');
 
 
 require('./config/passport')(passport); // pass passport for configuration
