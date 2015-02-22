@@ -45,7 +45,7 @@ exports.receiveText = function(request, response) {
             // Handle translation
             // TODO: Get this working lol
             console.log("Translating given string");
-
+            /*
             var language = '';
             if (parsedText.length >= 3) {
               language = parsedText[2];
@@ -68,7 +68,7 @@ exports.receiveText = function(request, response) {
                 textResp.message('Translation failed.');
                 response.send(textResp.toString());
               }
-            });
+            }); */
           } else {
 
             // Otherwise must be a user command
