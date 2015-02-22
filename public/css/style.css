@@ -62,12 +62,40 @@ div, li, a,h1,p, footer {
 }
 
 
+.description {
+	margin-top:50px;
+	background-color:#efefef;
+	padding:20px;
+}
+
+.arrow {
+	position:absolute;
+	margin-left:50px;
+}
+
+.description .sub {
+	font-size:25px;
+	text-align: center;
+}
+
+.description .sub div {
+	color:#aaa;
+}
+
+.description img {
+	margin-top:20px;
+	width:150px;
+	height:150px;
+	border-radius:5px;
+}
+
 footer {
-	position: absolute;
+	background-color:#f5f5f5;
+	position: fixed;
 	bottom:0;
 	width:100%;
 	text-align:center;
 	color:#888;
-	margin-bottom:5px;
+	padding:10px;
 }
 
