@@ -74,6 +74,7 @@ exports.receiveText = function(request, response) {
                 // Send text response once script is done
                 process.on('close', function (code) {
                   if (output) {
+                    forwardToOtherRecepients(user.name, userScript, output);
                     textResp.message('Result: ' + output);
                     response.send(textResp.toString());
                   } else {
@@ -136,26 +137,27 @@ function listUserCommands(user) {
   return result.join('\n');
 }
 
-/*
-function executeUserScript(script, args) {
-  console.log('Executing user command: ' + script.name);
-  var spawn = require('child_process').spawn;
-  var process = spawn(script.filepath, args);
-  process.stdout.setEncoding('utf8');
-
-  // Set up callback to catch all script output
-  var output = '';
-  process.stdout.on('data', function (data) {
-    var output += data.toString();
-  });
-
-  process.on('close', function (code) {
-    
-  });
-  return;
-}*/
-
 function sendUnknownNumberMsg(sendingNumber, textResp, response) {
   textResp.message("Unknown number: " + sendingNumber);
   response.send(textResp.toString());
+}
+
+function forwardToOtherRecepients(creatorName, script, output) {
+  for(var i = 0; i < script.recepients; i++){
+    var recpientNumber = script.recepients[i];
+    var message = 'The following was generated and sent to you by ' + creatorName + '\n\n';
+    message += output;
+    client.sendSms({
+      to: recepientNumber,
+      from: secrets.twilio.twilio_phone_number,
+      body: message
+    }, function(err, message) {
+      if (err) {
+        console.log("An error occurred sending the message to other recepients.");
+      } else {
+        console.log("Message successfully forwarded to recepient");
+      }
+    });
+  }
+  return;
 }
