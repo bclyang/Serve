@@ -7,14 +7,11 @@ var twilio = require('twilio');
 
 var User = require('../models/users');
 var secrets = require('../config/secrets');
-//var client = require
 
-/*var client = new twilio.RestClient(
+var client = new twilio.RestClient(
   secrets.twilio.twilio_account_id,
   secrets.twilio.twilio_auth_token
-);*/
-
-var texts = [];
+);
 
 // Called by twilio upon receiving text messages to user's
 // API number
@@ -31,14 +28,15 @@ exports.receiveText = function(request, response) {
     } else {
       if(!user) {
         console.log("Unknown user detected");
-        //sendUnknownNumberMsg(sendingNumber, textResp, response);
         textResp.message("Unknown number: " + sendingNumber);
         response.send(textResp.toString());
       } else {
         var parsedText = parseTextMessage(request.body.Body);
         var command = parsedText[0];
         if (isHelpRequest(command)) {
-           sendHelpMessage(textResp, response, user);
+          var commandsList = listUserCommands(user);
+          textResp.message('You have configured the following commands: ' + commandsList);
+          response.send(textResp.toString());
         } else {
 
           // Otherwise must be a user command
@@ -77,7 +75,13 @@ function parseTextMessage(textContent) {
 }
 
 function findScript(user, command) {
-  return '';
+  for(var scriptIndex in user.programs){
+    var script = user.programs[scriptIndex];
+    if (script.name === command) {
+      return script;
+    }
+  }
+  return null;
 }
 
 function isHelpRequest(command) {
@@ -95,6 +99,7 @@ function listUserCommands(user) {
 }
 
 function executeUserScript(script) {
+  console.log('Executing user command: ' + script.name);
   return;
 }
 
