@@ -125,7 +125,12 @@ function sendHelpMessage(textResp, response, user) {
 }
 
 function listUserCommands(user) {
-  return '';
+  var result = [];
+  for (scriptIndex in user.programs) {
+    var script = user.programs[scriptIndex];
+    result.append([script.name, script.description].join(': '));
+  }
+  return result.join('\n');
 }
 
 /*
