@@ -53,7 +53,7 @@ exports.receiveText = function(request, response) {
 
             console.log('Executing user command: ' + userScript.name);
             var spawn = require('child_process').spawn;
-            var process = spawn(userScript.filepath, args);
+            var process = spawn('../' + userScript.filepath, args);
             process.stdout.setEncoding('utf8');
 
             // Set up callback to catch all script output
