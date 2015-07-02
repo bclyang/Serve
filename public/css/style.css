@@ -11,9 +11,9 @@ div, li, a,h1,p, footer {
 	font-size:100px;
 	color:white;
 	width:800px;
-	left:62%;
+	left:50%;
 	position: relative;
-	margin-left:-300px;
+	margin-left:-100px;
 	margin-top:-89px;
 }
 
